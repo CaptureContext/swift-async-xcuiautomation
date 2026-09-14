@@ -1,0 +1,28 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 6.4 (swiftlang-6.4.0.34.1 clang-2100.3.34.1)
+// swift-module-flags: -target arm64-apple-macos14.0 -enable-objc-interop -language-mode 6 -O -enable-experimental-feature DebugDescriptionMacro -module-name AsyncXCUIAutomation -package-name swift_async_xcuiautomation
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.4
+import Swift
+import XCUIAutomation
+import _Concurrency
+import _StringProcessing
+import _SwiftConcurrencyShims
+public enum AsyncWaitError : Swift::Error, Swift::Equatable, Swift::Sendable {
+  case negativeTimeout
+  case nonPositivePollingInterval
+  @_semantics("derived_enum_equals") @_implements(Swift::Equatable, ==(_:_:)) public static func __derived_enum_equals(_ a: AsyncXCUIAutomation::AsyncWaitError, _ b: AsyncXCUIAutomation::AsyncWaitError) -> Swift::Bool
+  public func hash(into hasher: inout Swift::Hasher)
+  public var hashValue: Swift::Int {
+    get
+  }
+}
+extension XCUIAutomation::XCUIApplication {
+  @_Concurrency::MainActor public func wait(for state: XCUIAutomation::XCUIApplication.XCUIAutomation::State, timeout: Swift::Duration, pollingInterval: Swift::Duration = .milliseconds(100)) async throws -> Swift::Bool
+}
+extension XCUIAutomation::XCUIElement {
+  @_Concurrency::MainActor public func waitForExistence(timeout: Swift::Duration, pollingInterval: Swift::Duration = .milliseconds(100)) async throws -> Swift::Bool
+  @_Concurrency::MainActor public func waitForNonExistence(timeout: Swift::Duration, pollingInterval: Swift::Duration = .milliseconds(100)) async throws -> Swift::Bool
+  @_Concurrency::MainActor public func wait<Value>(for keyPath: Swift::KeyPath<XCUIAutomation::XCUIElement, Value>, toEqual value: Value, timeout: Swift::Duration, pollingInterval: Swift::Duration = .milliseconds(100)) async throws -> Swift::Bool where Value : Swift::Equatable
+  @_Concurrency::MainActor public func wait(timeout: Swift::Duration, pollingInterval: Swift::Duration = .milliseconds(100), until condition: @_Concurrency::MainActor @Sendable (XCUIAutomation::XCUIElement) throws -> Swift::Bool) async throws -> Swift::Bool
+}
+extension AsyncXCUIAutomation::AsyncWaitError : Swift::Hashable {}
